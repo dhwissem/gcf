@@ -6,9 +6,22 @@ steps:
       - |
         npm install && npm test && npm run build
 
-  - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
+  - name: "gcr.io/cloud-builders/gcloud-slim"
     args:
-      - "-c"
-      - |
-        gcloud functions deploy ts-template --runtime nodejs14 --trigger-http --allow-unauthenticated --entry-point helloWorld
+      - functions
+      - deploy
+      - ts-template
+      - --region=europe-west1
+      - --trigger-http
+      - --allow-unauthenticated
+      - --source=.
+      - --entry-point=helloWorld
+      - --runtime=nodejs10
+      - --memory=128MB
+
+  # - name: "gcr.io/cloud-builders/gcloud"
+  #   entrypoint: "bash"
+  #   args:
+  #     - "-c"
+  #     - |
+  #       gcloud functions deploy ts-template --runtime nodejs16 --trigger-http --allow-unauthenticated --region europe-west1 --entry-point helloWorld
