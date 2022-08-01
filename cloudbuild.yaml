@@ -11,4 +11,4 @@ steps:
     args:
       - "-c"
       - |
-        gcloud alpha functions add-iam-policy-binding ts-template --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
+        gcloud functions deploy ts-template --runtime nodejs16 --trigger-http --allow-unauthenticated --region europe-west1 --entry-point helloWorld
